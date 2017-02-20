@@ -1,10 +1,9 @@
-# One line Description of the project
+# Perform data analysis on velansandhai posts.
 
 ## Goal
-scrape vs
+scrape velansandhai group in facebook for leads.
  
-* Goal 1
-* Goal 2
+* Use splash for javascript rendering
 
 ## Setup
 
@@ -15,7 +14,7 @@ scrape vs
 git clone https://github.com/ravir-upwork/fb.git
 
 cd fb
-scrapy crawl fbcrawl
+scrapy crawl fbcrawl -a username=<email> -a password=<pass>
 ```
 
 ## Output
@@ -24,4 +23,4 @@ Output from the project goes here
 ```
 
 ## Result
-What is the observation. Elaborate
+It is practically impossible to scrap facebook just with html. This is due to page rendering with javascript.
