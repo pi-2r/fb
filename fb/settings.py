@@ -7,8 +7,14 @@
 #
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #
+#cookiecutter-add
+#add newfolder outputfiles
+import os
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 BOT_NAME = 'fb'
+
+
 
 SPIDER_MODULES = ['fb.spiders']
 NEWSPIDER_MODULE = 'fb.spiders'

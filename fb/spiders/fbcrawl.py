@@ -3,7 +3,9 @@ import scrapy
 from fb.ProductLoader import ProductLoader
 from fb.items import item1
 from scrapy_splash import SplashRequest
-
+from common.helpers.Helpers import Helpers
+import json
+from scrapy.http import Response, Request, TextResponse, HtmlResponse
 
 class fbcrawlSpider(scrapy.Spider):
     name = "fbcrawl"
@@ -86,8 +88,6 @@ class fbcrawlSpider(scrapy.Spider):
                         return {{
                         cookies = splash:get_cookies(),
                         html = splash:html(),
-                        png = splash:png(),
-                        har = splash:har(),
                         }}
                         end
                         """
@@ -100,4 +100,19 @@ class fbcrawlSpider(scrapy.Spider):
         yield req
 
     def parseVSPosts(self, response):
-        print response.body
+        js= json.loads(response.body)
+        js1 = js["1"]
+        js2= js1["html"]
+
+        res = TextResponse(url=response.request.url,body=js2,encoding='utf-8',request=response.request)
+        posts = res.css("[id^=mall_post]")
+        print "printing posts"
+
+        print posts
+        for post in posts:
+            print post.css("[href^='https://www.facebook.com/profile.php']::attr(href)").extract_first()
+            print '\n'.join(post.css("p::text").extract())
+
+
+        Helpers.saveResponse(response,"vsgroup")
+        #print response.body
